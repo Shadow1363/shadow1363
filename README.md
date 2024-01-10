@@ -1,5 +1,5 @@
 # 💫 About Me:
-Hey, you can call me Tom! 😄👋<br>I'm into JavaScript, Python, and APIs. 🖥️🐍🌐<br><br>const favourites = [<br>"Phoneboy & Avicii 🎵", <br>"Christopher Nolan & Alfonso Cuarón 🎥",<br>"Phillip K Dick & Arthur C Clarke 📚",<br>];<br>
+Hey, you can call me Tom! 😄👋<br>I'm into JavaScript, Python, and APIs. 🖥️🐍🌐<br><br>I do plan on reworking this about me as I find it kinda generic but better than nothing.<br><br>const favourites = [<br>"Phoneboy & Avicii 🎵", <br>"Christopher Nolan & Alfonso Cuarón 🎥",<br>"Phillip K Dick & Arthur C Clarke 📚",<br>];<br>
 
 
 # 💻 Tech Stack:
