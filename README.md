@@ -1,5 +1,5 @@
 # 💫 About Me:
-Hey, you can call me Tom!<br><br> I do plan on reworking this about me as I find it kinda generic but better than nothing.
+Hey, you can call me Tom!<br>
 ```jsx
 const favourites = [
   "Phoneboy & Avicii 🎵",
