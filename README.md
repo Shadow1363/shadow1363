@@ -9,7 +9,7 @@ const favourites = [
 ```
 
 # 💻 Tech Stack:
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white) ![Lua](https://img.shields.io/badge/lua-%232C2D72.svg?style=for-the-badge&logo=lua&logoColor=white) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![Canva](https://img.shields.io/badge/Canva-%2300C4CC.svg?style=for-the-badge&logo=Canva&logoColor=white) ![ReactJS](https://img.shields.io/badge/react.js-%2300D8FF.svg?style=for-the-badge&logo=react&logoColor=white) ![TypeScript](https://img.shields.io/badge/typescript-3178C6.svg?style=for-the-badge&logo=typescript&logoColor=FFFFFF) ![SQLite](https://img.shields.io/badge/sqlite-6CB4E4.svg?style=for-the-badge&logo=sqlite&logoColor=FFFFFF)
+[![My Skills](https://skillicons.dev/icons?i=html,css,js,ts,nodejs,react,next,python,postman,lua,sqlite)](https://tomasmartinez.xyz)
 
 # 📊 GitHub Stats:
 ![](https://github-readme-stats.vercel.app/api?username=shadow1363&theme=swift&hide_border=false&include_all_commits=false&count_private=false)<br/>
