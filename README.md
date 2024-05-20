@@ -4,7 +4,7 @@ Hey, you can call me Tom!<br>
 const favourites = {
   Artists 🎵: ["Phoneboy", "Avicii", "Billy Idol"],
   Directors 🎥: ["Christopher Nolan", "Ben Affleck", "Alfonso Cuarón"],
-  Writers 📚: ["Phillip K Dick", "J. R. R. Tolkien", "Arthur C Clarke"]
+  Writers 📚: ["Phillip K. Dick", "J. R. R. Tolkien", "Arthur C. Clarke"]
 };
 ```
 
