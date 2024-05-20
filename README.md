@@ -1,11 +1,11 @@
 # 💫 About Me:
 Hey, you can call me Tom!<br>
 ```jsx
-const favourites = [
-  "Phoneboy & Avicii 🎵",
-  "Christopher Nolan & Alfonso Cuarón 🎥",
-  "Phillip K Dick & Arthur C Clarke 📚"
-];
+const favourites = {
+  Artists 🎵: ["Phoneboy", "Avicii", "Billy Idol"],
+  Directors 🎥: ["Christopher Nolan", "Ben Affleck", "Alfonso Cuarón"],
+  Writers 📚: ["Phillip K Dick", "J. R. R. Tolkien", "Arthur C Clarke"]
+};
 ```
 
 # 💻 Tech Stack:
