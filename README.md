@@ -3,7 +3,7 @@ Hey, you can call me Tom!<br>
 ```jsx
 const favourites = {
   Artists 🎵: ["Phoneboy", "Avicii", "Billy Idol"],
-  Directors 🎥: ["Christopher Nolan", "Ben Affleck", "Alfonso Cuarón"],
+  Directors 🎥: ["Christopher Nolan", "Ridley Scott", "Alfonso Cuarón"],
   Writers 📚: ["Phillip K. Dick", "J. R. R. Tolkien", "Arthur C. Clarke"]
 };
 ```
