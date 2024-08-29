@@ -1,5 +1,6 @@
-# 💫 About Me:
+# [![Mudkip](https://img.pokemondb.net/sprites/black-white/anim/normal/mudkip.gif)](https://pokemondb.net/pokedex/mudkip) About Me:
 Hey, you can call me Tom!<br>
+
 ```jsx
 const favourites = {
   Artists 🎵: ["Phoneboy", "Avicii", "Billy Idol"],
