@@ -1,11 +1,11 @@
 # [![Mudkip](https://img.pokemondb.net/sprites/black-white/anim/normal/mudkip.gif)](https://pokemondb.net/pokedex/mudkip) About Me:
 Hey, you can call me Tom!<br>
 
-```jsx
+```js
 const favourites = {
-  Artists 🎵: ["Phoneboy", "Avicii", "Billy Idol"],
-  Directors 🎥: ["Christopher Nolan", "Ridley Scott", "Alfonso Cuarón"],
-  Writers 📚: ["Phillip K. Dick", "J. R. R. Tolkien", "Arthur C. Clarke"]
+  "Artists 🎵": ["Phoneboy", "Avicii", "Billy Idol"],
+  "Directors 🎥": ["Christopher Nolan", "Ridley Scott", "Alfonso Cuarón"],
+  "Writers 📚": ["Phillip K. Dick", "J. R. R. Tolkien", "Arthur C. Clarke"]
 };
 ```
 
