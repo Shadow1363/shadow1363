@@ -10,7 +10,7 @@ const favourites = {
 ```
 
 # 💻 What I use:
-[![My Skills](https://skillicons.dev/icons?i=html,css,js,ts,nodejs,react,next,python,postman,lua,sqlite,obsidian)](https://tomasmartinez.xyz)
+[![My Skills](https://skillicons.dev/icons?i=html,css,js,ts,nodejs,react,nestjs,next,python,postman,lua,sqlite,obsidian,java)](https://tomasmartinez.xyz)
 
 # 📊 GitHub Stats:
 ![](https://github-readme-stats.vercel.app/api?username=shadow1363&theme=swift&hide_border=false&include_all_commits=false&count_private=false)<br/>
