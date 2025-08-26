@@ -17,4 +17,8 @@ const favourites = {
 
 # 📝 Blog posts
 <!-- BLOG-POST-LIST:START -->
+- [Unix Cheat Sheet](https://blog.tomasmartinez.xyz/blog/2025/08/16/unix-cheat-sheet/)
+- [Best TCGs](https://blog.tomasmartinez.xyz/blog/2025/04/06/best-tcgs/)
+- [Single Player Card Games](https://blog.tomasmartinez.xyz/blog/2025/03/12/single-player-card-games/)
+- [Site is live](https://blog.tomasmartinez.xyz/blog/2025/03/10/site-is-live/)
 <!-- BLOG-POST-LIST:END -->
