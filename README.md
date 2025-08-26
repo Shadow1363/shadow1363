@@ -14,3 +14,7 @@ const favourites = {
 
 # 📊 GitHub Stats:
 ![](https://github-readme-stats.vercel.app/api?username=shadow1363&theme=transparent&hide_border=true&include_all_commits=false&count_private=false)![](https://github-readme-stats.vercel.app/api/top-langs/?username=shadow1363&theme=transparent&hide_border=true&include_all_commits=false&count_private=false&layout=compact)
+
+# 📝 Blog posts
+<!-- BLOG-POST-LIST:START -->
+<!-- BLOG-POST-LIST:END -->
