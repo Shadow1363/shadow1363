@@ -1,5 +1,7 @@
 # [![Mudkip](https://img.pokemondb.net/sprites/black-white/anim/normal/mudkip.gif)](https://pokemondb.net/pokedex/mudkip) About Me:
-Hey, you can call me Tom!<br>
+Hey, you can call me Tom!
+
+Currently I have a bunch of small just-for-fun projects public, but I got some big stuff in the works.
 
 ```js
 const favourites = {
