@@ -14,9 +14,9 @@ const favourites = {
 # 💻 What I use:
 [![Skills](https://skills.syvixor.com/api/icons?i=html,css,js,ts,nestjs,nextjs,react,nodejs,deno,python,java,lua,bash,postman,git,docker,kubernetes,sqlserver,sqlite,mysql,proxmox,capacitor,godot,obsidian&perline=12)](https://tomasmartinez.xyz)
 
-# 📊 GitHub Stats:
+# 📊 Stats:
 ![](https://github-readme-stats.vercel.app/api?username=shadow1363&theme=transparent&hide_border=true&include_all_commits=false&count_private=false)![](https://github-readme-stats.vercel.app/api/top-langs/?username=shadow1363&theme=transparent&hide_border=true&include_all_commits=false&count_private=false&layout=compact)
-
+![LeetCode Stats](https://leetcard.jacoblin.cool/Shadow1363?theme=transparent&font=JetBrains%20Mono)
 # 📝 Blog posts
 <!-- BLOG-POST-LIST:START -->
 - [Unix Cheat Sheet](https://blog.tomasmartinez.xyz/blog/2025/08/16/unix-cheat-sheet/)
