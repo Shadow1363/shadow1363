@@ -19,9 +19,9 @@ const favourites = {
 ![LeetCode Stats](https://leetcard.jacoblin.cool/Shadow1363?theme=transparent&font=JetBrains%20Mono)
 # 📝 Blog posts
 <!-- BLOG-POST-LIST:START -->
+- [Build with AI](https://blog.tomasmartinez.xyz/blog/2026/05/16/build-with-ai/)
 - [BeABetterFriend.app](https://blog.tomasmartinez.xyz/blog/2026/03/16/beabetterfriendapp/)
 - [Unix Cheat Sheet](https://blog.tomasmartinez.xyz/blog/2025/08/16/unix-cheat-sheet/)
 - [Best TCGs](https://blog.tomasmartinez.xyz/blog/2025/04/06/best-tcgs/)
 - [Single Player Card Games](https://blog.tomasmartinez.xyz/blog/2025/03/12/single-player-card-games/)
-- [Site is live](https://blog.tomasmartinez.xyz/blog/2025/03/10/site-is-live/)
 <!-- BLOG-POST-LIST:END -->
