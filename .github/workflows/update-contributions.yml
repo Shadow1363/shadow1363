@@ -14,50 +14,143 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build list of repos with merged PRs
+      - name: Update README list
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OWNER: ${{ github.repository_owner }}
         run: |
-          {
-            # 1. Repos where a commit authored by you is in the default branch
-            #    (this is what puts you in a repo's "Contributors" list, and it
-            #    catches maintainers who closed your PR but landed your commits)
-            gh search commits --author "$OWNER" --limit 1000 \
-              --json repository --jq '.[].repository | (.fullName // .nameWithOwner)' || true
-
-            # 2. Repos where you've had a PR merged
-            gh search prs --author "$OWNER" --merged --limit 1000 \
-              --json repository --jq '.[].repository.nameWithOwner' || true
-
-            # 3. Optional manual additions: one owner/repo per line
-            [ -f extra-repos.txt ] && grep -v '^\s*#' extra-repos.txt || true
-          } | sed 's/[[:space:]]*$//' | grep -v '^$' | sort -u -f \
-            | grep -v -i "^$OWNER/" > repos.txt || true
-
-          # Look up stars, keep public repos only, sort by stars (desc)
-          while read -r repo; do
-            gh api "repos/$repo" \
-              --jq '"\(.stargazers_count)\t\(.full_name)\t\(.html_url)\t\(.private)"' || true
-          done < repos.txt \
-            | awk -F'\t' '$4=="false"' \
-            | sort -t$'\t' -k1,1nr \
-            | awk -F'\t' '{printf "- [%s](%s) ⭐ %s\n", $2, $3, $1}' > list.md
-
-      - name: Write list into README
-        run: |
           python3 - <<'EOF'
-          import re, pathlib
-          readme = pathlib.Path("README.md")
-          text = readme.read_text()
-          items = pathlib.Path("list.md").read_text().strip() or "_Nothing yet._"
-          text = re.sub(
-              r"(<!-- CONTRIB:START -->).*?(<!-- CONTRIB:END -->)",
+          import json, os, re, time, pathlib
+          import urllib.request, urllib.parse, urllib.error
+
+          USER = os.environ["OWNER"]
+          TOKEN = os.environ["GH_TOKEN"]
+          README = pathlib.Path("README.md")
+          text = README.read_text(encoding="utf-8")
+
+          # ---- Manual lists kept in the README (never overwritten) ----
+          def config_block(name):
+              m = re.search(rf"<!--\s*CONTRIB:{name}\b(.*?)-->", text, re.S)
+              if not m:
+                  return []
+              out = []
+              for line in m.group(1).splitlines():
+                  line = line.strip()
+                  if not line or line.startswith("#"):
+                      continue
+                  line = re.sub(r"^https?://github\.com/", "", line).strip("/")
+                  out.append(line.lower())
+              return out
+
+          INCLUDE = config_block("INCLUDE")
+          EXCLUDE = set(config_block("EXCLUDE"))
+
+          # ---- GitHub API helper with rate-limit handling ----
+          def gh(path):
+              url = path if path.startswith("http") else "https://api.github.com" + path
+              while True:
+                  req = urllib.request.Request(url, headers={
+                      "Authorization": f"Bearer {TOKEN}",
+                      "Accept": "application/vnd.github+json",
+                      "User-Agent": "contrib-readme",
+                  })
+                  try:
+                      with urllib.request.urlopen(req) as r:
+                          return json.load(r)
+                  except urllib.error.HTTPError as e:
+                      h = e.headers
+                      if e.code == 429 or h.get("retry-after") or (
+                          e.code == 403 and h.get("x-ratelimit-remaining") == "0"
+                      ):
+                          if h.get("retry-after"):
+                              wait = int(h["retry-after"])
+                          else:
+                              wait = int(h.get("x-ratelimit-reset", 0)) - int(time.time()) + 1
+                          wait = max(wait, 5)
+                          print(f"Rate limited, sleeping {wait}s", flush=True)
+                          time.sleep(wait)
+                          continue
+                      if e.code in (403, 404, 409, 422, 451):
+                          return None
+                      raise
+
+          def search(kind, q):
+              items = []
+              for page in range(1, 11):  # search API caps at 1000 results
+                  d = gh(f"/search/{kind}?q={urllib.parse.quote(q)}&per_page=100&page={page}")
+                  if not d:
+                      break
+                  items += d["items"]
+                  if len(d["items"]) < 100:
+                      break
+              return items
+
+          cache = {}
+          def repo_info(name):
+              if name not in cache:
+                  cache[name] = gh(f"/repos/{name}")
+              return cache[name]
+
+          def eligible(r):
+              return (r and not r["private"] and not r["fork"]
+                      and r["owner"]["login"].lower() != USER.lower()
+                      and r["full_name"].lower() not in EXCLUDE)
+
+          # ---- 1. Repos with your merged PRs ----
+          prs = search("issues", f"is:pr is:merged author:{USER}")
+          pr_repos = {p["repository_url"].split("/repos/")[1].lower() for p in prs}
+
+          # ---- 2. Repos containing commits you authored ----
+          # Copies/re-uploads of a project carry the same commit SHAs, so group
+          # by SHA and keep only the original repo for each commit.
+          by_sha = {}
+          for c in search("commits", f"author:{USER}"):
+              by_sha.setdefault(c["sha"], set()).add(c["repository"]["full_name"].lower())
+
+          keep = set(pr_repos)
+          for sha, names in by_sha.items():
+              names -= EXCLUDE
+              if not names:
+                  continue
+              if names & pr_repos:
+                  continue  # original already found via merged PR
+              cands = [r for r in (repo_info(n) for n in names) if eligible(r)]
+              if not cands:
+                  continue
+              if len(cands) == 1:
+                  keep.add(cands[0]["full_name"].lower())
+                  continue
+              # Shared commit: prefer the repo where it arrived through a PR
+              via_pr = [r for r in cands if gh(f"/repos/{r['full_name']}/commits/{sha}/pulls")]
+              pool = via_pr or cands
+              # then most stars, then the oldest repo (the original)
+              best = min(pool, key=lambda r: (-r["stargazers_count"], r["created_at"]))
+              keep.add(best["full_name"].lower())
+
+          # ---- 3. Build the list ----
+          final = {}
+          for name in keep:
+              r = repo_info(name)
+              if eligible(r):
+                  final[r["full_name"]] = r
+          for name in INCLUDE:  # manual additions always included (if public)
+              r = repo_info(name)
+              if r and not r["private"]:
+                  final[r["full_name"]] = r
+
+          lines = [
+              f"- [{r['full_name']}]({r['html_url']}) ⭐ {r['stargazers_count']:,}"
+              for r in sorted(final.values(), key=lambda r: (-r["stargazers_count"], r["full_name"].lower()))
+          ]
+          items = "\n".join(lines) or "_Nothing yet._"
+
+          new = re.sub(
+              r"(<!--\s*CONTRIB:START\s*-->).*?(<!--\s*CONTRIB:END\s*-->)",
               lambda m: f"{m.group(1)}\n{items}\n{m.group(2)}",
               text, flags=re.S)
-          readme.write_text(text)
+          README.write_text(new, encoding="utf-8")
+          print(f"{len(final)} repos written")
           EOF
-          rm -f repos.txt list.md
 
       - name: Commit if changed
         run: |
