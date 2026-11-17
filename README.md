@@ -14,6 +14,11 @@ const favourites = {
 # 💻 My Daily Stack or Tools:
 [![Skills](https://skills.syvixor.com/api/icons?i=html,css,javascript,claudecode,proxmox,coolify,nodejs,nextjs,tailwindcss,zod,fastify,vscodium&perline=12&radius=40)](https://tomasmartinez.xyz)
 
+<!-- CONTRIB:INCLUDE
+Swordpdf/PS5SX2
+tldev/dorso
+-->
+
 ## 🌍 Open source I've contributed to
 <!-- CONTRIB:START -->
 - [emmabostian/developer-portfolios](https://github.com/emmabostian/developer-portfolios) ⭐ 27737
