@@ -14,9 +14,10 @@ const favourites = {
 # 💻 My Daily Stack or Tools:
 [![Skills](https://skills.syvixor.com/api/icons?i=html,css,javascript,claudecode,proxmox,coolify,nodejs,nextjs,tailwindcss,zod,fastify,vscodium&perline=12&radius=40)](https://tomasmartinez.xyz)
 
-# 📊 Stats:
-![](https://github-readme-stats.vercel.app/api?username=shadow1363&theme=transparent&hide_border=true&include_all_commits=false&count_private=false)![](https://github-readme-stats.vercel.app/api/top-langs/?username=shadow1363&theme=transparent&hide_border=true&include_all_commits=false&count_private=false&layout=compact)
-![LeetCode Stats](https://leetcard.jacoblin.cool/Shadow1363?theme=transparent&font=JetBrains%20Mono)
+## 🌍 Open source I've contributed to
+<!-- CONTRIB:START -->
+<!-- CONTRIB:END -->
+
 # 📝 Blog posts
 <!-- BLOG-POST-LIST:START -->
 - [Guia para desbloquear o PlayStation 5](https://blog.tomasmartinez.xyz/blog/2026/10/29/guia-para-desbloquear-o-playstation-5/)
