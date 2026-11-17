@@ -1,0 +1,66 @@
+name: Update contributed repos
+
+on:
+  schedule:
+    - cron: "0 6 * * *"   # daily at 06:00 UTC
+  workflow_dispatch:       # lets you run it manually from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build list of repos with merged PRs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OWNER: ${{ github.repository_owner }}
+        run: |
+          {
+            # 1. Repos where a commit authored by you is in the default branch
+            #    (this is what puts you in a repo's "Contributors" list, and it
+            #    catches maintainers who closed your PR but landed your commits)
+            gh search commits --author "$OWNER" --limit 1000 \
+              --json repository --jq '.[].repository | (.fullName // .nameWithOwner)' || true
+
+            # 2. Repos where you've had a PR merged
+            gh search prs --author "$OWNER" --merged --limit 1000 \
+              --json repository --jq '.[].repository.nameWithOwner' || true
+
+            # 3. Optional manual additions: one owner/repo per line
+            [ -f extra-repos.txt ] && grep -v '^\s*#' extra-repos.txt || true
+          } | sed 's/[[:space:]]*$//' | grep -v '^$' | sort -u -f \
+            | grep -v -i "^$OWNER/" > repos.txt || true
+
+          # Look up stars, keep public repos only, sort by stars (desc)
+          while read -r repo; do
+            gh api "repos/$repo" \
+              --jq '"\(.stargazers_count)\t\(.full_name)\t\(.html_url)\t\(.private)"' || true
+          done < repos.txt \
+            | awk -F'\t' '$4=="false"' \
+            | sort -t$'\t' -k1,1nr \
+            | awk -F'\t' '{printf "- [%s](%s) ⭐ %s\n", $2, $3, $1}' > list.md
+
+      - name: Write list into README
+        run: |
+          python3 - <<'EOF'
+          import re, pathlib
+          readme = pathlib.Path("README.md")
+          text = readme.read_text()
+          items = pathlib.Path("list.md").read_text().strip() or "_Nothing yet._"
+          text = re.sub(
+              r"(<!-- CONTRIB:START -->).*?(<!-- CONTRIB:END -->)",
+              lambda m: f"{m.group(1)}\n{items}\n{m.group(2)}",
+              text, flags=re.S)
+          readme.write_text(text)
+          EOF
+          rm -f repos.txt list.md
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898333+github-actions[bot]@users.noreply.github.com"
+          git diff --quiet README.md || (git commit -am "Update contributed repos" && git push)
