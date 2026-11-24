@@ -21,9 +21,9 @@ tldev/dorso
 
 ## 🌍 Open source I've contributed to
 <!-- CONTRIB:START -->
-- [emmabostian/developer-portfolios](https://github.com/emmabostian/developer-portfolios) ⭐ 27,813
-- [tldev/dorso](https://github.com/tldev/dorso) ⭐ 2,649
-- [Swordpdf/PS5SX2](https://github.com/Swordpdf/PS5SX2) ⭐ 1,700
+- [emmabostian/developer-portfolios](https://github.com/emmabostian/developer-portfolios) ⭐ 27,819
+- [tldev/dorso](https://github.com/tldev/dorso) ⭐ 2,650
+- [Swordpdf/PS5SX2](https://github.com/Swordpdf/PS5SX2) ⭐ 1,701
 - [discohaus/discopanel](https://github.com/discohaus/discopanel) ⭐ 362
 - [mateo-cogeanu/ProsperoCraft](https://github.com/mateo-cogeanu/ProsperoCraft) ⭐ 60
 - [athNdev/carbonpanel](https://github.com/athNdev/carbonpanel) ⭐ 5
